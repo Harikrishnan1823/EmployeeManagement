@@ -12,6 +12,7 @@ public class Employee {
     private Long id;
     private String name;
     private String email;
+    private String jobTitle;
     private String department;
     private int salary;
 
@@ -20,11 +21,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Long id, String name, String email,
+    public Employee(Long id, String name, String email,String jobTitle,
                     String department, int salary) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.jobTitle=jobTitle;
         this.department = department;
         this.salary = salary;
     }
@@ -72,6 +74,10 @@ public class Employee {
     }
 
     public String getJobTitle() {
-        return email;
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
     }
 }
