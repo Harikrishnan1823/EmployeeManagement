@@ -11,4 +11,5 @@ public interface EmployeeService {
     void save(Employee employee);
     Employee getById(Long id);
     void deleteById(Long id);
+    List<Employee> search(String keyword);
 }

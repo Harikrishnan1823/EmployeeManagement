@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class EmployeeController {
 
@@ -15,10 +17,18 @@ public class EmployeeController {
 
     // 1. Display home page with list of employees
     @GetMapping("/")
-    public String viewHomePage(Model model) {
-        model.addAttribute("listEmployees", service.getBy());
-        return "index"; // index.html
+    public String viewHomePage(Model model, @RequestParam(value = "keyword", required = false) String keyword) {
+        List<Employee> list;
+        if (keyword != null && !keyword.isEmpty()) {
+            list = service.search(keyword);
+            model.addAttribute("keyword", keyword); // retain input text
+        } else {
+            list = service.getBy();
+        }
+        model.addAttribute("listEmployees", list);
+        return "index";
     }
+
 
     // 2. Show form to add a new employee
     @GetMapping("/showNewEmployeeForm")
@@ -48,5 +58,7 @@ public class EmployeeController {
         service.deleteById(id);
         return "redirect:/";
     }
+
+
 }
 
